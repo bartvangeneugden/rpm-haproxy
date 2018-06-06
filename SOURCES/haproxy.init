@@ -35,7 +35,7 @@ fi
 BIN=/usr/sbin/$BASENAME
 
 CFG=/etc/$BASENAME
-[ -f $CFG ] || exit 1
+[ -d $CFG ] || exit 1
 
 PIDFILE=/var/run/$BASENAME.pid
 LOCKFILE=/var/lock/subsys/$BASENAME
