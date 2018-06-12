@@ -39,6 +39,7 @@ CFG=/etc/$BASENAME
 
 PIDFILE=/var/run/$BASENAME.pid
 LOCKFILE=/var/lock/subsys/$BASENAME
+SOCKETFILE=/run/haproxy-admin.sock
 
 RETVAL=0
 
@@ -87,7 +88,7 @@ reload() {
     echo "Errors found in configuration file, check it with '$BASENAME check'."
     return 1
   fi
-  $BIN -D -f $CFG -p $PIDFILE -sf $(cat $PIDFILE)
+  $BIN -D -f $CFG -p $PIDFILE -x $SOCKETFILE -sf $(cat $PIDFILE)
 }
 
 check() {
