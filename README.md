@@ -11,7 +11,7 @@ Perform the following on a build box as a regular user.
 ## Checkout this repository
 
     cd /opt
-    git clone https://github.com/DBezemer/rpm-haproxy.git 
+    git clone https://github.com/ExpediaInc/rpm-haproxy.git
     cd ./rpm-haproxy
     git checkout 1.8
 
