@@ -20,6 +20,11 @@ Perform the following on a build box as a regular user.
     
 Resulting RPM will be in /opt/rpm-haproxy/rpmbuild/RPMS/
 
+## Upload via S3
+	sudo yum install python-pip
+	sudo pip install s3cmd
+    s3cmd <insert path here>
+
 ## Credits
 
 Based on the Red Hat 6.4 RPM spec for haproxy 1.4 combined with work done by 
