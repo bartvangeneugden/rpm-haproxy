@@ -39,7 +39,7 @@ CFG=/etc/$BASENAME
 
 PIDFILE=/var/run/$BASENAME.pid
 LOCKFILE=/var/lock/subsys/$BASENAME
-SOCKETFILE=/run/haproxy-admin.sock
+SOCKETFILE=/run/$BASENAME.sock
 
 RETVAL=0
 
