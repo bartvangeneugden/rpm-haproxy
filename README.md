@@ -10,10 +10,8 @@ Perform the following on a build box as a regular user.
 
 ## Checkout this repository
 
-    cd /opt
     git clone https://github.com/ExpediaInc/rpm-haproxy.git
     cd ./rpm-haproxy
-    git checkout 1.8
 
 ## Build using makefile
     make
@@ -21,9 +19,9 @@ Perform the following on a build box as a regular user.
 Resulting RPM will be in /opt/rpm-haproxy/rpmbuild/RPMS/
 
 ## Upload via S3
-	sudo yum install python-pip
-	sudo pip install s3cmd
-    s3cmd <insert path here>
+    sudo yum install python-pip
+    sudo pip install s3cmd
+    s3cmd put haproxy-1.8.8-1.amzn1.x86_64.rpm s3://tls-test-software-repo/haproxy/haproxy-1.8.8-1.amzn1.x86_64.rpm
 
 ## Credits
 
