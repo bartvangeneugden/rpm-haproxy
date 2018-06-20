@@ -39,7 +39,7 @@ CFG=/etc/$BASENAME
 
 PIDFILE=/var/run/$BASENAME.pid
 LOCKFILE=/var/lock/subsys/$BASENAME
-SOCKETFILE=/run/$BASENAME.sock
+SOCKETFILE=/run/$BASENAME-admin.sock
 
 RETVAL=0
 
