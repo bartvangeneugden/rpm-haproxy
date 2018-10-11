@@ -10,6 +10,7 @@ ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q
 ExecStart=/usr/sbin/haproxy -Ws -f $CONFIG -p $PIDFILE
 ExecReload=/usr/sbin/haproxy -f $CONFIG -c -q
 ExecReload=/bin/kill -USR2 $MAINPID
+ExecStop=/bin/killall haproxy -USR1 -w
 KillMode=mixed
 Restart=always
 Type=notify

@@ -60,7 +60,7 @@ start() {
 
 stop() {
   echo -n "Shutting down $BASENAME: "
-  killproc $BASENAME -USR1
+  killall $BASENAME -USR1 -w
   RETVAL=$?
   echo
   [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
