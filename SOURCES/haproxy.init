@@ -60,7 +60,7 @@ start() {
 
 stop() {
   echo -n "Shutting down $BASENAME: "
-  killall $BASENAME -USR1 -w
+  kill -s USR1 $(cat $PIDFILE)
   RETVAL=$?
   echo
   [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
