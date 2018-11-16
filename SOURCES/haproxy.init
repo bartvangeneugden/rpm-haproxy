@@ -60,8 +60,9 @@ start() {
 
 stop() {
   echo -n "Shutting down $BASENAME: "
-  kill -s USR1 $(cat $PIDFILE)
+  killproc $BASENAME -USR1
   RETVAL=$?
+  [ $RETVAL -eq 0 ] && wait $(cat $PIDFILE) 2>/dev/null
   echo
   [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
   [ $RETVAL -eq 0 ] && rm -f $PIDFILE
