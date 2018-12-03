@@ -59,10 +59,16 @@ start() {
 }
 
 stop() {
-  echo -n "Shutting down $BASENAME: "
-  killproc $BASENAME -USR1
+  PID=$(cat $PIDFILE)
+  echo -n "Shutting down $BASENAME"
+  /usr/bin/kill -s USR1 $PID
   RETVAL=$?
-  [ $RETVAL -eq 0 ] && wait $(cat $PIDFILE) 2>/dev/null
+  while [ -e /proc/$PID ]
+  do
+    echo "$PID:$BASENAME is still running"
+    sleep 5
+  done
+  echo "$BASENAME stopped"
   echo
   [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
   [ $RETVAL -eq 0 ] && rm -f $PIDFILE
