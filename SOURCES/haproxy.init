@@ -63,11 +63,11 @@ stop() {
   echo "Shutting down $BASENAME"
   /usr/bin/kill -s USR1 $PID
   RETVAL=$?
-  count=0
-  while [ -e /proc/$PID && count -lt 30 ]
+  COUNT=0
+  while [[ -e /proc/$PID && $COUNT -lt 30 ]]
   do
-    (( count++ ))
-    echo "$PID:$BASENAME is still running. Try $count"
+    (( COUNT++ ))
+    echo "$PID:$BASENAME is still running. Try $COUNT"
     sleep 5
   done
   echo "$BASENAME stopped"
