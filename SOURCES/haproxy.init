@@ -34,11 +34,12 @@ fi
 
 BIN=/usr/sbin/$BASENAME
 
-CFG=/etc/$BASENAME/$BASENAME.cfg
-[ -f $CFG ] || exit 1
+CFG=/etc/$BASENAME
+[[ -f $CFG || -d $CFG ]] || exit 1
 
 PIDFILE=/var/run/$BASENAME.pid
 LOCKFILE=/var/lock/subsys/$BASENAME
+SOCKETFILE=/run/$BASENAME-admin.sock
 
 RETVAL=0
 
@@ -58,9 +59,18 @@ start() {
 }
 
 stop() {
-  echo -n "Shutting down $BASENAME: "
-  killproc $BASENAME -USR1
+  PID=$(cat $PIDFILE)
+  echo "Shutting down $BASENAME"
+  /usr/bin/kill -s USR1 $PID
   RETVAL=$?
+  COUNT=0
+  while [[ -e /proc/$PID && $COUNT -lt 30 ]]
+  do
+    (( COUNT++ ))
+    echo "$PID:$BASENAME is still running. Try $COUNT"
+    sleep 5
+  done
+  echo "$BASENAME stopped"
   echo
   [ $RETVAL -eq 0 ] && rm -f $LOCKFILE
   [ $RETVAL -eq 0 ] && rm -f $PIDFILE
@@ -87,7 +97,7 @@ reload() {
     echo "Errors found in configuration file, check it with '$BASENAME check'."
     return 1
   fi
-  $BIN -D -f $CFG -p $PIDFILE -sf $(cat $PIDFILE)
+  $BIN -D -f $CFG -p $PIDFILE -x $SOCKETFILE -sf $(cat $PIDFILE)
 }
 
 check() {
